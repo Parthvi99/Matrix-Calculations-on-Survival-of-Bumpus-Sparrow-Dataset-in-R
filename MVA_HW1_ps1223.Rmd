@@ -1,0 +1,107 @@
+---
+title: "Parthvi_Soni_ps1223_MVA_HW1"
+output: html_document
+date: "2023-02-03"
+---
+
+```{r}
+
+#Name: Parthvi Soni 
+# The Bumpus Sparrow Dataset 
+# survival:
+# logical indicating survival of the storm
+# 
+# length:
+# length (mm) from "beak to the tip of the tail"
+# 
+# alar:
+# alar extent (mm) from "tip to tip of the extended wings"
+# 
+# humerus:
+# length (in) of the humerus
+# 
+# femur:
+# length (in) of the femur
+# 
+# keel:
+# length (in) of keel of the sternum
+
+
+
+
+library(readr)
+#Sparrow Example
+Bumpus_sparrows <- read_csv("~/Desktop/Parthvi/MITA/SEM2/MVA/Bumpus_sparrows.csv")
+Bumpus_sparrows
+sparr <- Bumpus_sparrows
+sparr
+
+# creating separate data for surivived sparrows and non survived sparrows...
+survival_data <- sparr[1:21,]
+survival_data
+unique(survival_data$Survivorship) # checking the unique values for survivorship
+
+non_survival_data <- sparr[22:49,]
+non_survival_data
+unique(non_survival_data$Survivorship) # checking the unique values for non survivorship
+
+survival_data <- survival_data[,-1] # removing the first col as it does not contain any numerical values
+survival_data
+
+
+non_survival_data <- non_survival_data[,-1] # removing the first col as it does not contain any numerical values
+non_survival_data
+
+is.matrix(survival_data) #false
+is.matrix(non_survival_data) #false
+
+
+survival_matrix <- as.matrix(survival_data) # converting the data to matrix 
+survival_matrix
+is.matrix(survival_matrix)
+
+
+non_survival_matrix <- as.matrix(non_survival_data) # converting the data to matrix 
+non_survival_matrix
+is.matrix(non_survival_matrix)
+
+
+# Computing the means of each variable in matrices 
+colMeans(survival_matrix)
+# mean value for each column in survival matrix 
+
+colMeans(non_survival_matrix)
+# mean value for each column in non survival matrix  
+
+# Covariance matrix for survival matrix
+cov(survival_matrix)
+# total length and alar extent very good
+# l_humerous and total length very less 
+
+# Covariance matrix for non survival matrix
+cov(non_survival_matrix)
+
+# Inference :Covariance is a measure of how much two random variables vary together.
+# When we observe the covariance matrices for both survival and non survival data
+# we can see that the alar extent vs total length for survival matrix has a value of 9.10 
+# and in the non survival matrix the value is 17.19 which means that they are highly dependent on each other 
+# also higher the corvariance between these variables, lower are the chances of survival 
+
+
+# Correlation matrix for survival matrix
+cor(survival_matrix)
+ # Inferences : We know that correlation indicates how strongly two variables are related 
+# as we can see from the correlation matrix of survival_matrix, the correlation values 
+# of L_keel_sternum and L_humerous is 0.4165447 which positive and less strongly related
+ # for the non survival matrix, the value of L_keel_sternum and L_humerous is 0.6677936
+# which is again positive and less strongly related 
+# Now since the range of the values in the correlation values is always between -1 to +1,
+# we see that there is a decent difference between the two values  
+
+
+# Correlation matrix for non survival matrix
+cor(non_survival_matrix)
+
+
+```
+
